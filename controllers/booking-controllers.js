@@ -3,8 +3,8 @@ import { booking } from "../models/booking-model.js"
 
 
 export const getAllBookings = async (req, res) => {
-    const newBooking = await new booking()
-        const bookings = await newBooking.save(req.body)
+    const newBooking = new booking(req.body)
+        const bookings = await newBooking.save()
     res.status(200).json(bookings)
 }
 
@@ -20,8 +20,8 @@ export const getOneBooking = async (req, res, next) => {
 
 export const postAllBookings = async (req, res, next) => {
     try {
-        const newBooking = await new booking()
-        const bookings = await newBooking.save(req.body)
+        const newBooking = new booking(req.body)
+        const bookings = await newBooking.save()
         res.status(201).json(bookings)
     } catch (error) {
         next(error);
