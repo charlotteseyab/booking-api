@@ -1,14 +1,29 @@
+import { booking } from "../models/booking-model.js"
 
-export const getAllBookings = (req,res) => {
+
+
+export const getAllBookings = (req, res) => {
     res.status(200).json('These are all bookings')
 }
 
-export const getOneBooking = (req, res) => {
-    res.status(200).json('This is one Booking')
+export const getOneBooking = async (req, res, next) => {
+    try {
+        const newBooking = await new booking()
+        const bookings = await newBooking.save(req.body)
+        res.status(200).json(bookings)
+    } catch (error) {
+        next(error);
+    }
 }
 
-export const postAllBookings = (req, res) => {
-    res.status(201).json('Posted bookings')
+export const postAllBookings = async (req, res, next) => {
+    try {
+        const newBooking = await new booking()
+        const bookings = await newBooking.save(req.body)
+        res.status(201).json(bookings)
+    } catch (error) {
+        next(error);
+    }
 }
 
 export const updateOneBooking = (req, res) => {

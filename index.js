@@ -1,16 +1,26 @@
 import express from 'express';
 import { bookingRouter } from './routes/all-routes.js';
-//import { getOneBooking } from './controllers/booking-controllers.js';
+import mongoose from 'mongoose';
+import 'dotenv/config'
 
-//craete app
+await mongoose.connect(process.env.MONGO_URI);
+
+//create app
 const app = express();
+
+//use middlewares
+app.use(express.json());
+
 //define route
 app.get('/booking', (req,res,next) => {
     console.log(req.headers);
     res.json('You have booked a seat');
 });
 
+
+app.use(express.json())
 app.use(bookingRouter)
+
 
 //listen for incoming requests
 app.listen(3000, () => {
