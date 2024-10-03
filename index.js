@@ -1,7 +1,8 @@
 import express from 'express';
 import { bookingRouter } from './routes/all-routes.js';
 import mongoose from 'mongoose';
-import 'dotenv/config'
+import 'dotenv/config';
+import cors from "cors";
 
 await mongoose.connect(process.env.MONGO_URI);
 
@@ -17,7 +18,7 @@ app.get('/booking', (req,res,next) => {
     res.json('You have booked a seat');
 });
 
-
+app.use(cors())
 app.use(express.json())
 app.use(bookingRouter)
 
