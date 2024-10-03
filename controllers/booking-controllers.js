@@ -3,8 +3,8 @@ import { booking } from "../models/booking-model.js"
 
 
 export const getAllBookings = async (req, res) => {
-    const newBooking = await new booking()
-        const bookings = await newBooking.save(req.body)
+    const newBooking = await new booking(req.body)
+        const bookings = await newBooking.save()
     res.status(200).json(bookings)
 }
 
